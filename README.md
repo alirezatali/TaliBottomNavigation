@@ -1,17 +1,20 @@
 # TaliBottomNavigation
  [![Platform](https://img.shields.io/badge/Platform-Android-green.svg?style=flat)](https://www.android.com/) [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
  [![Bintray](https://img.shields.io/bintray/v/alirezatali/TaliBottomNavigation/com.alitali%3Atalibottomnavigation.svg?logo=jfrog-bintray)](https://bintray.com/alirezatali/TaliBottomNavigation/com.alitali%3Atalibottomnavigation) 
- getting Started
+
 ------------------------
+## Features
 `TaliBottomNavigation` manage the various (Navigation) graphs needed for a [BottomNavigationView].
-
+- Google Material BottomNavigationView.
+- Jetpack Navigation Library.
 The actual features are:
-
  * Bottom Bar with multiple NavGraph .
- * Saving fragment state.
+ * Saving fragment state on changing the the fragment.
+
  This sample is a workaround until the Navigation Component supports multiple back stacks.
  Inspired by this [kotlin version](https://github.com/android/architecture-components-samples/blob/master/NavigationAdvancedSample/app/src/main/java/com/example/android/navigationadvancedsample/NavigationExtensions.kt)
- 
+ ## getting Started
+ add dependency:
  ### Gradle Dependency
 * Add it in your root build.gradle at the end of repositories:
 
@@ -92,6 +95,5 @@ TaliBottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigati
         NavigationUI.setupActionBarWithNavController(this, navController, configuration);
     }
  ```
- ## For more information see the [Sample Project](https://github.com/alirezatali/TaliBottomNavigation/tree/master/Sample)
- ### 
+ ## For more information see the [Sample Project](https://github.com/alirezatali/TaliBottomNavigation/tree/master/Sample) 
  
