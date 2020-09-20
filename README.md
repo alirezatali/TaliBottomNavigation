@@ -84,13 +84,14 @@ TaliBottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigati
         controller.observe(this, this::setupActionBarWithNavController);
         
  ```
-  #Note: This code must add too your activity 
+  ## Note: 
+  This code must add too your activity 
  ```
   protected void setupActionBarWithNavController(NavController navController){
         AppBarConfiguration configuration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, configuration);
     }
  ```
- # For more information see the [Sample Project] (https://github.com/alirezatali/TaliBottomNavigation/tree/master/Sample)
+ ## For more information see the [Sample Project](https://github.com/alirezatali/TaliBottomNavigation/tree/master/Sample)
  ### 
  
