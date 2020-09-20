@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
 buildscript {
 
     repositories {
@@ -9,7 +10,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.1'
 
     }
 }
@@ -59,48 +61,53 @@ dependencies {
 
     testImplementation "junit:junit:4.12"
 }
-apply plugin: 'maven-publish'
 
-task androidJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    android.libraryVariants.all { variant ->
-        if (variant.name == 'release') {
-            owner.classpath += variant.javaCompileProvider.get().classpath
-        }
-    }
-    exclude '**/R.html', '**/R.*.html', '**/index.html'
-}
+//region Publish to jCenter
+def libGroupId = 'com.alitali'
+def libArtifactId = 'talibottomnavigation'
+def libVersion = '1.0.0'
+def libDesc = 'This is an Android project allowing to use google material BottomNavigationView with androidx Navigation Controller'
+def libLicenses = ['Apache-2.0']
+def libVCSUrl = 'https://github.com/alirezatali/TaliBottomNavigation'
 
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-    archiveClassifier.set('javadoc')
-    from androidJavadocs.destinationDir
-}
-
-task androidSourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
+// Generate Source Jar
+task sourceJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
+    classifier "sources"
 }
 
-// Because the components are created only during the afterEvaluate phase, you must
-// configure your publications using the afterEvaluate() lifecycle method.
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            release(MavenPublication) {
-                // Applies the component for the release build variant.
-                from components.release
-
-                // Adds javadocs and sources as separate jars.
-                artifact androidJavadocsJar
-                artifact androidSourcesJar
-
-                // You can customize attributes of the publication here or in module's build.gradle file.
-                groupId = 'com.alitali.talibottomnavigation'
-                artifactId = 'final'
-                version = android.defaultConfig.versionName // or just '1.0'
-            }
+// Create the publication with the pom configuration
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            groupId libGroupId
+            artifactId libArtifactId
+            version libVersion
+            artifact(sourceJar)
+            artifact("$buildDir/outputs/aar/$libArtifactId-release.aar")
         }
     }
 }
+
+// Bintray config
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+    publications = ['MyPublication']
+    pkg {
+        repo = "TaliBottomNavigation"
+        name = "$libGroupId:$libArtifactId"
+        desc = libDesc
+        licenses = libLicenses
+        vcsUrl = libVCSUrl
+        version {
+            name = libVersion
+            vcsTag = libVersion
+            released = new Date()
+        }
+    }
+}
+//endregion

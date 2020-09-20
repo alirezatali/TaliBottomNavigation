@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    app:startDestination="@id/homeFragment"
+    tools:ignore="UnusedNavigation">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.alitali.sample.view.HomeFragment"
+        android:label="VenueFragment"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/showDetails"
+            app:destination="@id/showFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/showFragment"
+        android:name="com.alitali.sample.view.DetailsFragment"
+        android:label="ShowVenueFragment"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+</navigation>
