@@ -32,9 +32,9 @@ dependencies {
 }
 ```
 
-### Usage
+## Usage
 ------------------------
-## Step 1.  Add this view to your activity layout
+### Step 1.  Add this view to your activity layout
 ```
 <com.alitali.talibottomnavigation.TaliBottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -46,7 +46,7 @@ dependencies {
         android:splitMotionEvents="true"/>
 
 ```
-## Step 2.  create your bottom_menu.xml to your menu directory
+### Step 2.  create your bottom_menu.xml to your menu directory
 ```
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -68,9 +68,10 @@ dependencies {
 </menu>
 
 ``` 
-## Step 3.  Add your navigation resource file 
-# Note: The navigation id for any item must same name. for example : Navigation for "home" button has "home" id
-## Step 4.  Setting in your MainAcitivty
+### Step 3.  Add your navigation resource file 
+## Note: 
+The navigation id for any item must same name. for example : Navigation for "home" button has "home" id
+### Step 4.  Setting in your MainAcitivty
 ```
 TaliBottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
 
